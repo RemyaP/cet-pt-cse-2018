@@ -11,7 +11,7 @@ namespace RealEstateManagement
 {
 
 
-    public partial class Contact
+    public partial class Buyer
     {
     }
 }

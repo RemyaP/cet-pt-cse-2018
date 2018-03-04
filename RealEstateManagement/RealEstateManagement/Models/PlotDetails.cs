@@ -18,22 +18,29 @@ namespace RealEstateManagement.Models
         }
 
         public double Latitude { get; set; }
-        public double Longitute { get; set; }
+        public double Longitude { get; set; }
 
         private long _plotId;
 
-        MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString);
+        protected static MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString);
 
         public PlotDetails( double lat, double lng )
         {
             Latitude = lat;
-            Longitute = lng;
+            Longitude = lng;
+        }
+
+        private PlotDetails(long id, double lat, double lng )
+        {
+            Latitude = lat;
+            Longitude = lng;
+            _plotId = id;
         }
 
         public PlotDetails()
         {
             Latitude = 0;
-            Longitute = 0;
+            Longitude = 0;
         }
 
         public bool SavePlot()
@@ -44,7 +51,7 @@ namespace RealEstateManagement.Models
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("insert into plot_details ( plot_lat, plot_lng ) values ( @plot_lat, @plot_lng )", conn);
                 cmd.Parameters.AddWithValue( "@plot_lat", Latitude );
-                cmd.Parameters.AddWithValue( "@plot_lng", Longitute );
+                cmd.Parameters.AddWithValue( "@plot_lng", Longitude );
                 cmd.ExecuteNonQuery();
                 long id = cmd.LastInsertedId; 
                 cmd.Dispose();
@@ -58,6 +65,34 @@ namespace RealEstateManagement.Models
             catch( MySqlException ex )
             {
                 return status;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
+        public static List<PlotDetails> GetAllPlots()
+        {
+            List < PlotDetails > plotDetails = new List < PlotDetails >();
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from plot_details", conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while( rdr.Read() )
+                {
+                    var id = rdr.GetInt64("plot_id");
+                    var lat = rdr.GetDouble("plot_lat");
+                    var lng = rdr.GetDouble("plot_lng");
+                    plotDetails.Add( new PlotDetails(id, lat, lng));
+                }
+                return plotDetails;
+            }
+            catch( MySqlException ex )
+            {
+                return plotDetails;
             }
             finally
             {

@@ -24,19 +24,13 @@ namespace RealEstateManagement
             bool status = _plotDetails.SavePlot();
             if( status )
             {
-                ShowMessage( "Registered successfuly...!" );
+                Utils.ShowMessage( this, "Plot added.!" );
             }
             else
             {
-                ShowMessage( "Registration failed...!" );
+                Utils.ShowMessage( this, "Failed.!" );
             }
         }
 
-        void ShowMessage( string msg )
-        {
-            string script = "alert(\"" + msg + "\");";
-            ScriptManager.RegisterClientScriptBlock( this, GetType(),
-                                  "ServerControlScript", script, true );
-        }
     }
 }
