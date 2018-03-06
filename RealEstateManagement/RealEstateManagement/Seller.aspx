@@ -8,15 +8,16 @@
         var marker = false; ////Has the user plotted their location marker? 
 
         function initMap() {
+            var centerLatLng = new google.maps.LatLng(9.9312328, 76.26730409999999);
             var options = {
-                center: { lat: 9.9312328, lng: 76.26730409999999 },
+                center: centerLatLng,
                 zoom: 13,
                 //mapTypeId: 'roadmap'
             }
-            map = new google.maps.Map(document.getElementById('map'), options);
+            map = new google.maps.Map(document.getElementById('<%=map.ClientID %>'), options);
 
             // Create the search box and link it to the UI element.
-            var input = document.getElementById('pac-input');
+            var input = document.getElementById('<%=pac_input.ClientID %>');
             var searchBox = new google.maps.places.SearchBox(input);
             map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -30,7 +31,6 @@
             // more details for that place.
             searchBox.addListener('places_changed', function () {
                 var places = searchBox.getPlaces();
-
                 if (places.length == 0) {
                     return;
                 }
@@ -110,8 +110,8 @@
         document.bind("projectLoadComplete", initMap);
     </script>
     <div class="jumbotron">
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box"><br />
-        <div id="map" style="width: 100%; height: 400px; border: 5px solid #5E5454;"></div>
+        <input id="pac_input" class="controls" type="text" placeholder="Search Box" runat="server"><br />
+        <div id="map" style="width: 100%; height: 400px; border: 5px solid #5E5454;" runat="server"></div>
     </div>
     <asp:HiddenField ID="lat" runat="server" />
     <asp:HiddenField ID="lng" runat="server" />

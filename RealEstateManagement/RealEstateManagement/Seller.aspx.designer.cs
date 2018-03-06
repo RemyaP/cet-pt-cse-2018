@@ -13,6 +13,24 @@ namespace RealEstateManagement {
     public partial class Seller {
         
         /// <summary>
+        /// pac_input control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText pac_input;
+        
+        /// <summary>
+        /// map control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl map;
+        
+        /// <summary>
         /// lat control.
         /// </summary>
         /// <remarks>
