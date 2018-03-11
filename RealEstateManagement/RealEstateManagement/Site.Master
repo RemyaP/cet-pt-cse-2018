@@ -13,7 +13,7 @@
     </asp:PlaceHolder>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF3zz-BVxSoOyd-G7tgfPjAoPKPNCRmas&libraries=places&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=key&libraries=places&callback=initMap"></script>
     <script>
         var icon = {  //Will contain the style of marker icon
             url: place.icon,
