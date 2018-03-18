@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2018-03-18 12:33
+-- Generated: 2018-03-18 19:42
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -9,9 +9,9 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `real` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `real_estate` DEFAULT CHARACTER SET utf8 ;
 
-CREATE TABLE IF NOT EXISTS `real`.`user` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`user` (
   `user_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(20) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
@@ -26,13 +26,13 @@ CREATE TABLE IF NOT EXISTS `real`.`user` (
   INDEX `fk_user_status1_idx` (`status_id` ASC),
   CONSTRAINT `fk_user_status1`
     FOREIGN KEY (`status_id`)
-    REFERENCES `real`.`status` (`status_id`)
+    REFERENCES `real_estate`.`status` (`status_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`seller` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`seller` (
   `seller_id` INT(11) NOT NULL AUTO_INCREMENT,
   `seller_type` INT(11) NOT NULL,
   `user_id` INT(10) UNSIGNED NOT NULL,
@@ -40,13 +40,13 @@ CREATE TABLE IF NOT EXISTS `real`.`seller` (
   INDEX `fk_seller_user_idx` (`user_id` ASC),
   CONSTRAINT `fk_seller_user`
     FOREIGN KEY (`user_id`)
-    REFERENCES `real`.`user` (`user_id`)
+    REFERENCES `real_estate`.`user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`buyer` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`buyer` (
   `buyer_id` INT(11) NOT NULL AUTO_INCREMENT,
   `min_area` DOUBLE UNSIGNED NULL DEFAULT NULL,
   `max_area` DOUBLE UNSIGNED NULL DEFAULT NULL,
@@ -57,13 +57,13 @@ CREATE TABLE IF NOT EXISTS `real`.`buyer` (
   INDEX `fk_buyer_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_buyer_user1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `real`.`user` (`user_id`)
+    REFERENCES `real_estate`.`user` (`user_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`plot` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`plot` (
   `plot_id` INT(11) NOT NULL AUTO_INCREMENT,
   `area` DOUBLE UNSIGNED NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
@@ -74,13 +74,13 @@ CREATE TABLE IF NOT EXISTS `real`.`plot` (
   INDEX `fk_plot_seller1_idx` (`seller_id` ASC),
   CONSTRAINT `fk_plot_seller1`
     FOREIGN KEY (`seller_id`)
-    REFERENCES `real`.`seller` (`seller_id`)
+    REFERENCES `real_estate`.`seller` (`seller_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`bid` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`bid` (
   `bid_id` INT(11) NOT NULL AUTO_INCREMENT,
   `plot_id` INT(11) NOT NULL,
   `buyer_id` INT(11) NOT NULL,
@@ -91,18 +91,18 @@ CREATE TABLE IF NOT EXISTS `real`.`bid` (
   INDEX `fk_purchase_buyer1_idx` (`buyer_id` ASC),
   CONSTRAINT `fk_purchase_plot1`
     FOREIGN KEY (`plot_id`)
-    REFERENCES `real`.`plot` (`plot_id`)
+    REFERENCES `real_estate`.`plot` (`plot_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_purchase_buyer1`
     FOREIGN KEY (`buyer_id`)
-    REFERENCES `real`.`buyer` (`buyer_id`)
+    REFERENCES `real_estate`.`buyer` (`buyer_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`institutes` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`institutes` (
   `id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `real`.`institutes` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`landmark` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`landmark` (
   `plot_id` INT(11) NOT NULL,
   `landmark_id` INT(10) UNSIGNED NOT NULL,
   INDEX `fk_landmark_plot_idx` (`plot_id` ASC),
@@ -119,43 +119,43 @@ CREATE TABLE IF NOT EXISTS `real`.`landmark` (
   PRIMARY KEY (`plot_id`, `landmark_id`),
   CONSTRAINT `fk_landmark_plot1`
     FOREIGN KEY (`plot_id`)
-    REFERENCES `real`.`plot` (`plot_id`)
+    REFERENCES `real_estate`.`plot` (`plot_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_landmark_table11`
     FOREIGN KEY (`landmark_id`)
-    REFERENCES `real`.`institutes` (`id`)
+    REFERENCES `real_estate`.`institutes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_landmark_hospital1`
     FOREIGN KEY (`landmark_id`)
-    REFERENCES `real`.`hospital` (`id`)
+    REFERENCES `real_estate`.`hospital` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_landmark_railway1`
     FOREIGN KEY (`landmark_id`)
-    REFERENCES `real`.`railway` (`id`)
+    REFERENCES `real_estate`.`railway` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_landmark_temple1`
     FOREIGN KEY (`landmark_id`)
-    REFERENCES `real`.`temple` (`id`)
+    REFERENCES `real_estate`.`temple` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_landmark_mosque1`
     FOREIGN KEY (`landmark_id`)
-    REFERENCES `real`.`mosque` (`id`)
+    REFERENCES `real_estate`.`mosque` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_landmark_church1`
     FOREIGN KEY (`landmark_id`)
-    REFERENCES `real`.`church` (`id`)
+    REFERENCES `real_estate`.`church` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`hospital` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`hospital` (
   `id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `real`.`hospital` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`railway` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`railway` (
   `id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `real`.`railway` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`temple` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`temple` (
   `id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `real`.`temple` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`mosque` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`mosque` (
   `id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `real`.`mosque` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`church` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`church` (
   `id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
@@ -200,19 +200,19 @@ CREATE TABLE IF NOT EXISTS `real`.`church` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`images` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`images` (
   `plot_id` INT(11) NOT NULL,
   `image` BLOB NOT NULL,
   INDEX `fk_images_plot1_idx` (`plot_id` ASC),
   CONSTRAINT `fk_images_plot1`
     FOREIGN KEY (`plot_id`)
-    REFERENCES `real`.`plot` (`plot_id`)
+    REFERENCES `real_estate`.`plot` (`plot_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real`.`status` (
+CREATE TABLE IF NOT EXISTS `real_estate`.`status` (
   `status_id` INT(11) NOT NULL AUTO_INCREMENT,
   `status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`status_id`))
