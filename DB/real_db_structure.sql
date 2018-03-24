@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2018-03-18 19:42
+-- Generated: 2018-03-24 15:21
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -63,18 +63,24 @@ CREATE TABLE IF NOT EXISTS `real_estate`.`buyer` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real_estate`.`plot` (
-  `plot_id` INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `real_estate`.`property` (
+  `property_id` INT(11) NOT NULL AUTO_INCREMENT,
   `area` DOUBLE UNSIGNED NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
   `longitude` DOUBLE NULL DEFAULT NULL,
-  `min_price` INT(10) UNSIGNED NULL DEFAULT NULL,
   `seller_id` INT(11) NOT NULL,
-  PRIMARY KEY (`plot_id`),
+  `category` INT(11) NOT NULL,
+  PRIMARY KEY (`property_id`),
   INDEX `fk_plot_seller1_idx` (`seller_id` ASC),
+  INDEX `fk_plot_category1_idx` (`category` ASC),
   CONSTRAINT `fk_plot_seller1`
     FOREIGN KEY (`seller_id`)
     REFERENCES `real_estate`.`seller` (`seller_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_plot_category1`
+    FOREIGN KEY (`category`)
+    REFERENCES `real_estate`.`category` (`category_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -82,16 +88,15 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `real_estate`.`bid` (
   `bid_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `plot_id` INT(11) NOT NULL,
+  `property_id` INT(11) NOT NULL,
   `buyer_id` INT(11) NOT NULL,
   `status` INT(10) UNSIGNED NULL DEFAULT NULL,
-  `amount` DOUBLE UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`bid_id`),
-  INDEX `fk_purchase_plot1_idx` (`plot_id` ASC),
+  INDEX `fk_purchase_plot1_idx` (`property_id` ASC),
   INDEX `fk_purchase_buyer1_idx` (`buyer_id` ASC),
   CONSTRAINT `fk_purchase_plot1`
-    FOREIGN KEY (`plot_id`)
-    REFERENCES `real_estate`.`plot` (`plot_id`)
+    FOREIGN KEY (`property_id`)
+    REFERENCES `real_estate`.`property` (`property_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_purchase_buyer1`
@@ -102,111 +107,47 @@ CREATE TABLE IF NOT EXISTS `real_estate`.`bid` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real_estate`.`institutes` (
-  `id` INT(10) UNSIGNED NOT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `latitude` DOUBLE NULL DEFAULT NULL,
-  `longitude` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE IF NOT EXISTS `real_estate`.`landmark` (
-  `plot_id` INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `real_estate`.`property_has_landmark` (
+  `property_id` INT(11) NOT NULL,
   `landmark_id` INT(10) UNSIGNED NOT NULL,
-  INDEX `fk_landmark_plot_idx` (`plot_id` ASC),
-  INDEX `fk_landmark_landmark_idx` (`landmark_id` ASC),
-  PRIMARY KEY (`plot_id`, `landmark_id`),
+  INDEX `fk_landmark_plot_idx` (`property_id` ASC),
+  PRIMARY KEY (`property_id`, `landmark_id`),
   CONSTRAINT `fk_landmark_plot1`
-    FOREIGN KEY (`plot_id`)
-    REFERENCES `real_estate`.`plot` (`plot_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_landmark_table11`
-    FOREIGN KEY (`landmark_id`)
-    REFERENCES `real_estate`.`institutes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_landmark_hospital1`
-    FOREIGN KEY (`landmark_id`)
-    REFERENCES `real_estate`.`hospital` (`id`)
+    FOREIGN KEY (`property_id`)
+    REFERENCES `real_estate`.`property` (`property_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_landmark_railway1`
     FOREIGN KEY (`landmark_id`)
-    REFERENCES `real_estate`.`railway` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_landmark_temple1`
-    FOREIGN KEY (`landmark_id`)
-    REFERENCES `real_estate`.`temple` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_landmark_mosque1`
-    FOREIGN KEY (`landmark_id`)
-    REFERENCES `real_estate`.`mosque` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_landmark_church1`
-    FOREIGN KEY (`landmark_id`)
-    REFERENCES `real_estate`.`church` (`id`)
+    REFERENCES `real_estate`.`landmark` (`landmark_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `real_estate`.`hospital` (
-  `id` INT(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `real_estate`.`landmark` (
+  `landmark_id` INT(10) UNSIGNED NOT NULL,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `latitude` DOUBLE NULL DEFAULT NULL,
   `longitude` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE IF NOT EXISTS `real_estate`.`railway` (
-  `id` INT(10) UNSIGNED NOT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `latitude` DOUBLE NULL DEFAULT NULL,
-  `longitude` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE IF NOT EXISTS `real_estate`.`temple` (
-  `id` INT(10) UNSIGNED NOT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `latitude` DOUBLE NULL DEFAULT NULL,
-  `longitude` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE IF NOT EXISTS `real_estate`.`mosque` (
-  `id` INT(10) UNSIGNED NOT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `latitude` DOUBLE NULL DEFAULT NULL,
-  `longitude` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE IF NOT EXISTS `real_estate`.`church` (
-  `id` INT(10) UNSIGNED NOT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `latitude` DOUBLE NULL DEFAULT NULL,
-  `longitude` DOUBLE NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  `landmark_type` INT(11) NOT NULL,
+  PRIMARY KEY (`landmark_id`),
+  INDEX `fk_landmark_landmarktype1_idx` (`landmark_type` ASC),
+  CONSTRAINT `fk_landmark_landmarktype1`
+    FOREIGN KEY (`landmark_type`)
+    REFERENCES `real_estate`.`landmarktype` (`type_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `real_estate`.`images` (
-  `plot_id` INT(11) NOT NULL,
+  `property_id` INT(11) NOT NULL,
   `image` BLOB NOT NULL,
-  INDEX `fk_images_plot1_idx` (`plot_id` ASC),
+  INDEX `fk_images_plot1_idx` (`property_id` ASC),
   CONSTRAINT `fk_images_plot1`
-    FOREIGN KEY (`plot_id`)
-    REFERENCES `real_estate`.`plot` (`plot_id`)
+    FOREIGN KEY (`property_id`)
+    REFERENCES `real_estate`.`property` (`property_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -216,6 +157,47 @@ CREATE TABLE IF NOT EXISTS `real_estate`.`status` (
   `status_id` INT(11) NOT NULL AUTO_INCREMENT,
   `status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`status_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `real_estate`.`landmarktype` (
+  `type_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `type_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`type_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `real_estate`.`category` (
+  `category_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`category_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `real_estate`.`min_price` (
+  `property_id` INT(11) NOT NULL,
+  `plot_price` DOUBLE NULL DEFAULT NULL,
+  `apartment_price` DOUBLE NULL DEFAULT NULL,
+  PRIMARY KEY (`property_id`),
+  CONSTRAINT `fk_min_price_property1`
+    FOREIGN KEY (`property_id`)
+    REFERENCES `real_estate`.`property` (`property_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `real_estate`.`bid_price` (
+  `bid_id` INT(11) NOT NULL,
+  `plot_price` DOUBLE NULL DEFAULT NULL,
+  `apartment_price` DOUBLE NULL DEFAULT NULL,
+  PRIMARY KEY (`bid_id`),
+  INDEX `fk_bid_price_bid1_idx` (`bid_id` ASC),
+  CONSTRAINT `fk_bid_price_bid1`
+    FOREIGN KEY (`bid_id`)
+    REFERENCES `real_estate`.`bid` (`bid_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
