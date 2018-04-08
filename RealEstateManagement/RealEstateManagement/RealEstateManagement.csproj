@@ -217,21 +217,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\bid.cs" />
-    <Compile Include="Models\bid_price.cs" />
-    <Compile Include="Models\buyer.cs" />
-    <Compile Include="Models\category.cs" />
+    <Compile Include="EntityModels\bid.cs" />
+    <Compile Include="EntityModels\bid_price.cs" />
+    <Compile Include="EntityModels\buyer.cs" />
+    <Compile Include="EntityModels\category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\image.cs" />
-    <Compile Include="Models\landmark.cs" />
-    <Compile Include="Models\landmarktype.cs" />
+    <Compile Include="EntityModels\image.cs" />
+    <Compile Include="EntityModels\landmark.cs" />
+    <Compile Include="EntityModels\landmarktype.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\min_price.cs" />
-    <Compile Include="Models\property.cs" />
-    <Compile Include="Models\RealEstateModel.cs" />
-    <Compile Include="Models\seller.cs" />
-    <Compile Include="Models\status.cs" />
-    <Compile Include="Models\user.cs" />
+    <Compile Include="EntityModels\min_price.cs" />
+    <Compile Include="EntityModels\property.cs" />
+    <Compile Include="EntityModels\RealEstateModel.cs" />
+    <Compile Include="EntityModels\seller.cs" />
+    <Compile Include="EntityModels\status.cs" />
+    <Compile Include="EntityModels\user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -258,6 +258,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="AddPlot.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
