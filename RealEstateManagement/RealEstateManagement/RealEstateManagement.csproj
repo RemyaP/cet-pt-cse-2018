@@ -77,12 +77,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.6.10.6\lib\net452\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=6.9.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.11\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.Entity.6.10.6\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.11\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -213,6 +213,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
+    <Compile Include="Controllers\SellerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,6 +223,7 @@
     <Compile Include="EntityModels\bid_price.cs" />
     <Compile Include="EntityModels\buyer.cs" />
     <Compile Include="EntityModels\category.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="EntityModels\image.cs" />
     <Compile Include="EntityModels\landmark.cs" />
@@ -232,23 +235,14 @@
     <Compile Include="EntityModels\seller.cs" />
     <Compile Include="EntityModels\status.cs" />
     <Compile Include="EntityModels\user.cs" />
+    <Compile Include="Models\PropertyViewModel.cs" />
+    <Compile Include="Models\SellerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="docs\MySqlCommand.xml" />
-    <Content Include="docs\MySqlCommandBuilder.xml" />
-    <Content Include="docs\MySqlConnection.xml" />
-    <Content Include="docs\MySqlConnectionStringBuilder.xml" />
-    <Content Include="docs\MySqlDataAdapter.xml" />
-    <Content Include="docs\MySqlDataReader.xml" />
-    <Content Include="docs\MySqlException.xml" />
-    <Content Include="docs\MySqlHelper.xml" />
-    <Content Include="docs\MySqlParameter.xml" />
-    <Content Include="docs\MySqlParameterCollection.xml" />
-    <Content Include="docs\MySqlTransaction.xml" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -258,7 +252,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="AddPlot.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -271,7 +264,23 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Table\css\animate.css" />
+    <Content Include="Table\css\buttons.css" />
+    <Content Include="Table\css\main.css" />
+    <Content Include="Table\css\util.css" />
+    <Content Include="Table\fonts\Awesome\css\font-awesome.css" />
+    <Content Include="Table\fonts\Awesome\css\font-awesome.min.css" />
+    <Content Include="Table\fonts\Awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Table\js\main.js" />
+    <Content Include="Table\scroll\perfect-scrollbar.css" />
+    <Content Include="Table\scroll\perfect-scrollbar.min.js" />
+    <Content Include="Table\select\select2.css" />
+    <Content Include="Table\select\select2.js" />
+    <Content Include="Table\select\select2.min.css" />
+    <Content Include="Table\select\select2.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -305,15 +314,64 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Property\Add.cshtml" />
+    <Content Include="Views\Seller\Index.cshtml" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-Bold.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-BoldItalic.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-ExtraBold.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-Italic.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-Light.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-LightItalic.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-Regular.otf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-Regular.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-SemiBold.ttf" />
+    <Content Include="Table\fonts\OpenSans\OpenSans-SemiBoldItalic.ttf" />
+    <Content Include="Table\fonts\Awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Table\fonts\Awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Table\fonts\Awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Table\fonts\Awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Table\fonts\Awesome\fonts\FontAwesome.otf" />
+    <Content Include="Table\fonts\Awesome\less\animated.less" />
+    <Content Include="Table\fonts\Awesome\less\bordered-pulled.less" />
+    <Content Include="Table\fonts\Awesome\less\core.less" />
+    <Content Include="Table\fonts\Awesome\less\fixed-width.less" />
+    <Content Include="Table\fonts\Awesome\less\font-awesome.less" />
+    <Content Include="Table\fonts\Awesome\less\icons.less" />
+    <Content Include="Table\fonts\Awesome\less\larger.less" />
+    <Content Include="Table\fonts\Awesome\less\list.less" />
+    <Content Include="Table\fonts\Awesome\less\mixins.less" />
+    <Content Include="Table\fonts\Awesome\less\path.less" />
+    <Content Include="Table\fonts\Awesome\less\rotated-flipped.less" />
+    <Content Include="Table\fonts\Awesome\less\screen-reader.less" />
+    <Content Include="Table\fonts\Awesome\less\stacked.less" />
+    <Content Include="Table\fonts\Awesome\less\variables.less" />
+    <Content Include="Table\fonts\Awesome\scss\font-awesome.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_animated.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_core.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_fixed-width.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_icons.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_larger.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_list.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_mixins.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_path.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_screen-reader.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_stacked.scss" />
+    <Content Include="Table\fonts\Awesome\scss\_variables.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>

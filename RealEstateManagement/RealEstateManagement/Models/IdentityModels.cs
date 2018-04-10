@@ -21,7 +21,7 @@ namespace RealEstateManagement.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base( "RealEstateModel", throwIfV1Schema: false)
         {
         }
 

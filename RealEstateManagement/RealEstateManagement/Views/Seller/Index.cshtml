@@ -1,0 +1,54 @@
+﻿@model RealEstateManagement.Models.SellerViewModel
+@{
+    ViewBag.Title = "Seller";
+}
+<h2>@ViewBag.Title.</h2>
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Table/fonts/Awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Table/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="~/Table/select/select2.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Table/scroll/perfect-scrollbar.css"/>
+<script src="~/Table/select/select2.min.js"></script>
+<script src="~/Table/js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Table/css/util.css"/>
+<link rel="stylesheet" type="text/css" href="~/Table/css/main.css"/>
+<!--===============================================================================================-->
+<div class="limiter">
+    <div class="wrap-table100">
+        <div class="table100">
+            <table>
+                <thead>
+                    <tr class="table100-head">
+                        <th class="column1">PropertyId</th>
+                        <th class="column2">Area</th>
+                        <th class="column3" colspan="2">Location</th>
+                        <th class="column4">Price</th>
+                        <th class="column5">
+                            @Html.ActionLink( "Add", "Add", "Property", new { area = "" }, new { @class = "button button-rounded button-primary" } )
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach( var item in Model.Properties )
+                    {
+                        <tr>
+                            <td class="column1">
+                                @item.PropertyId
+                            </td>
+                            <td class="column2">
+                                @item.Area
+                            </td>
+                            <td class="column3">
+                                @item.Latitude
+                            </td>
+                            <td class="column4">@item.Longitude</td>
+                            <td class="column5">1</td>
+                            <td class="column6">$999.00</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
