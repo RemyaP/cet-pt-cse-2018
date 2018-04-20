@@ -6,29 +6,22 @@ namespace RealEstateManagement.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("real_estate.landmark")]
-    public partial class landmark
+    [Table( "real_estate.propery_status" )]
+    public partial class property_status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public landmark()
+        public property_status()
         {
             properties = new HashSet<property>();
         }
 
         [Key]
-        [Column(TypeName = "uint")]
-        public long landmark_id { get; set; }
+        public int status_id { get; set; }
 
-        [StringLength(100)]
-        public string name { get; set; }
-
-        public double? latitude { get; set; }
-
-        public double? longitude { get; set; }
-
-        public int landmarktype { get; set; }
-
-        public virtual landmarktype landmark_type { get; set; }
+        [Column("status")]
+        [Required]
+        [StringLength(45)]
+        public string status1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<property> properties { get; set; }

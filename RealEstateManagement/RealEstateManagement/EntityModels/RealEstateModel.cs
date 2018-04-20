@@ -22,6 +22,7 @@ namespace RealEstateManagement.Models
         public virtual DbSet<property> properties { get; set; }
         public virtual DbSet<seller> sellers { get; set; }
         public virtual DbSet<status> status { get; set; }
+        public virtual DbSet<property_status> property_status { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<image> images { get; set; }
 
@@ -46,6 +47,16 @@ namespace RealEstateManagement.Models
                 .HasForeignKey( e => e.category )
                 .WillCascadeOnDelete( false );
 
+            modelBuilder.Entity<property_status>()
+                .Property( e => e.status1 )
+                .IsUnicode( false );
+
+            modelBuilder.Entity<property_status>()
+                .HasMany( e => e.properties )
+                .WithRequired( e => e.status1 )
+                .HasForeignKey( e => e.status )
+                .WillCascadeOnDelete( false );
+
             modelBuilder.Entity<landmark>()
                 .Property( e => e.name )
                 .IsUnicode( false );
@@ -56,8 +67,8 @@ namespace RealEstateManagement.Models
 
             modelBuilder.Entity<landmarktype>()
                 .HasMany( e => e.landmarks )
-                .WithRequired( e => e.landmarktype )
-                .HasForeignKey( e => e.landmark_type )
+                .WithRequired( e => e.landmark_type )
+                .HasForeignKey( e => e.landmarktype )
                 .WillCascadeOnDelete( false );
 
             modelBuilder.Entity<property>()

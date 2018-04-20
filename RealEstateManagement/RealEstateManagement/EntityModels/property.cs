@@ -30,10 +30,14 @@ namespace RealEstateManagement.Models
 
         public int category { get; set; }
 
+        public int status { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bid> bids { get; set; }
 
         public virtual category category1 { get; set; }
+
+        public virtual property_status status1 { get; set; }
 
         public virtual min_price min_price { get; set; }
 

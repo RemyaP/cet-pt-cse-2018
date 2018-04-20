@@ -22,7 +22,8 @@
                         <th class="column1">PropertyId</th>
                         <th class="column2">Area</th>
                         <th class="column3" colspan="2">Location</th>
-                        <th class="column4">Price</th>
+                        <th class="column4">Type</th>
+                        <th class="column4">Status</th>
                         <th class="column5">
                             @Html.ActionLink( "Add", "Add", "Property", new { area = "" }, new { @class = "button button-rounded button-primary" } )
                         </th>
@@ -42,8 +43,9 @@
                                 @item.Latitude
                             </td>
                             <td class="column4">@item.Longitude</td>
-                            <td class="column5">1</td>
-                            <td class="column6">$999.00</td>
+                            <td class="column5">@item.Type</td>
+                            <td class="column5">@item.Status</td>
+                            <td class="column6"></td>
                         </tr>
                     }
 
