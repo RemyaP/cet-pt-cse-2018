@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 using System.Data.Entity;
+using DataAccess.EntityModels;
 
 namespace RealEstateManagement.Models
 {
@@ -80,7 +81,7 @@ namespace RealEstateManagement.Models
             SellerId = prop.seller_id;
             Category = prop.category;
             Type = prop.category1.type;
-            Status = prop.status1.status1;
+            Status = prop.propery_status.status;
         }
 
         public PropertyViewModel()
@@ -111,7 +112,7 @@ namespace RealEstateManagement.Models
             {
                 property prop = new property();
                 List<Marker> markers = GetMarkers();
-                RealEstateModel db = new RealEstateModel();
+                RealEntities db = new RealEntities();
                 prop.area = Area;
                 prop.latitude = Latitude;
                 prop.longitude = Longitude;
@@ -119,12 +120,12 @@ namespace RealEstateManagement.Models
                 prop.category = Category;
                 prop.status = 1;
                 db.properties.Add( prop );
-                //db.SaveChanges();
+                db.SaveChanges();
                 db.properties.Attach( prop );
                 foreach( var marker in markers )
                 {
-                    long landmark_id = 0;
-                    landmark lm = db.landmarks.Where( l => l.latitude == marker.Lat && l.longitude == marker.Lng && l.landmarktype == marker.Type).FirstOrDefault();
+                    RealEntities ldb = new RealEntities();
+                    landmark lm = ldb.landmarks.Where( l => l.latitude == marker.Lat && l.longitude == marker.Lng && l.landmarktype == marker.Type).FirstOrDefault();
                     if( null == lm )
                     {
                         lm = new landmark();
@@ -132,12 +133,15 @@ namespace RealEstateManagement.Models
                         lm.latitude = marker.Lat;
                         lm.longitude = marker.Lng;
                         lm.name = marker.Name;
-                        db.landmarks.Add( lm );
-                        db.landmarks.Attach( lm );
-                       // db.SaveChanges();
-                        //landmark_id = lm.landmark_id;
+                        ldb.landmarks.Add( lm );
+                        ldb.SaveChanges();
                     }
-                    prop.landmarks.Add( lm );
+                    if( 0 != lm.landmark_id) 
+                    {
+                        landmark mark = db.landmarks.Where( l => l.landmark_id == lm.landmark_id).Single();
+                        db.landmarks.Attach( mark );
+                        prop.landmarks.Add( mark );
+                    }
                 }
                 db.SaveChanges();
                 return true;
@@ -150,7 +154,7 @@ namespace RealEstateManagement.Models
 
         private List<Marker> GetMarkers()
         {
-            using( RealEstateModel db = new RealEstateModel() )
+            using( RealEntities db = new RealEntities() )
             {
                 List<Marker> markers = new List<Marker>();
                 if( null != church )

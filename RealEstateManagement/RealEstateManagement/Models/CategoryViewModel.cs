@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using DataAccess.EntityModels;
 
 namespace RealEstateManagement.Models
 {
@@ -13,7 +14,7 @@ namespace RealEstateManagement.Models
         public static Dictionary<int, string> GetCategories()
         {
             if( null != _categories ) return _categories;
-            using( RealEstateModel db = new RealEstateModel() )
+            using( RealEntities db = new RealEntities() )
             {
                 _categories = db.categories.ToDictionary( c => c.category_id, c => c.type );
 

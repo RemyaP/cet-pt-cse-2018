@@ -215,27 +215,13 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\SellerController.cs" />
-    <Compile Include="EntityModels\property_status.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="EntityModels\bid.cs" />
-    <Compile Include="EntityModels\bid_price.cs" />
-    <Compile Include="EntityModels\buyer.cs" />
-    <Compile Include="EntityModels\category.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="EntityModels\image.cs" />
-    <Compile Include="EntityModels\landmark.cs" />
-    <Compile Include="EntityModels\landmarktype.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="EntityModels\min_price.cs" />
-    <Compile Include="EntityModels\property.cs" />
-    <Compile Include="EntityModels\RealEstateModel.cs" />
-    <Compile Include="EntityModels\seller.cs" />
-    <Compile Include="EntityModels\status.cs" />
-    <Compile Include="EntityModels\user.cs" />
     <Compile Include="Models\PropertyViewModel.cs" />
     <Compile Include="Models\SellerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -375,6 +361,15 @@
     </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{4d649cc9-fb6b-485e-9d46-02a4fb42613b}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.EntityModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace RealEstateManagement.Models
         public void GetProperties()
         {
             if( null != Properties ) Properties.Clear();
-            using( RealEstateModel db = new RealEstateModel() )
+            using( RealEntities db = new RealEntities() )
             {
                 var properties = db.properties.Where( p => p.seller_id == SellerId ).ToList<property>();
                 if( null == Properties ) Properties = new List<PropertyViewModel>();
