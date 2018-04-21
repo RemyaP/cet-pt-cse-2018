@@ -105,6 +105,10 @@ iframe {
     padding-top : 20px;
 }
 
+.right{
+    float: right;
+}
+
 .container-table100 {
     width: 100%;
     min-height: 100vh;
@@ -150,12 +154,12 @@ table {
     }
 
     table thead tr {
-        height: 60px;
-        background: #36304a;
+        height: 40px;
+        background: #333333;
     }
 
     table tbody tr {
-        height: 50px;
+        height: 35px;
     }
 
         table tbody tr:last-child {

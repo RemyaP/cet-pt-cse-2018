@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 using System.Data.Entity;
 using DataAccess.EntityModels;
+using System.IO;
 
 namespace RealEstateManagement.Models
 {
@@ -54,6 +55,7 @@ namespace RealEstateManagement.Models
         private double _lng;
         private string _name;
     }
+
     public class PropertyViewModel
     {
         [Key]
@@ -71,6 +73,11 @@ namespace RealEstateManagement.Models
         public string hindu_temple { get; set; }
         public string hospital { get; set; }
         public string mosque { get; set; }
+        public double LandPrice { get; set; }
+        public double HousePrice { get; set; }
+
+        [Display( Name = "Browse" )]
+        public HttpPostedFileBase[] Images { get; set; }
 
         public PropertyViewModel( property prop )
         {
@@ -121,6 +128,31 @@ namespace RealEstateManagement.Models
                 prop.status = 1;
                 db.properties.Add( prop );
                 db.SaveChanges();
+                min_price price = new min_price();
+                switch( prop.category )
+                {
+                    case 1:
+                        {
+                            price.plot_price = LandPrice;
+                            price.apartment_price = 0;
+                            break;
+                        }
+                    case 2:
+                        {
+                            price.plot_price = LandPrice;
+                            price.apartment_price = HousePrice;
+                            break;
+                        }
+                    case 3:
+                        {
+                            price.plot_price = 0;
+                            price.apartment_price = HousePrice;
+                            break;
+                        }
+                }
+                price.property_id = prop.property_id;
+                db.min_price.Add( price );
+                db.SaveChanges();
                 db.properties.Attach( prop );
                 foreach( var marker in markers )
                 {
@@ -141,6 +173,21 @@ namespace RealEstateManagement.Models
                         landmark mark = db.landmarks.Where( l => l.landmark_id == lm.landmark_id).Single();
                         db.landmarks.Attach( mark );
                         prop.landmarks.Add( mark );
+                    }
+                }
+                db.SaveChanges();
+
+                foreach( HttpPostedFileBase image in Images )
+                {
+                    //Checking file is available to save.  
+                    if( image != null )
+                    {
+                        image img = new image();
+                        img.property_id = prop.property_id;
+                        MemoryStream target = new MemoryStream();
+                        image.InputStream.CopyTo( target );
+                        img.image1 = target.ToArray();
+                        db.images.Add( img );
                     }
                 }
                 db.SaveChanges();

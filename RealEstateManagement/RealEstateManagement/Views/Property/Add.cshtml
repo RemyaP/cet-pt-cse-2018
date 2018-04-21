@@ -3,7 +3,26 @@
     ViewBag.Title = "Add";
 }
 
-<h2>@ViewBag.Title.</h2>
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Table/fonts/Awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Form/fonts/iconic/css/material-design-iconic-font.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Table/css/animate.css" />
+<link rel="stylesheet" type="text/css" href="~/Form/css-hamburgers/hamburgers.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Form/animsition/css/animsition.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Table/select/select2.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Form/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="~/Form/noui/nouislider.min.css">
+<link rel="stylesheet" type="text/css" href="~/Form/css/util.css">
+<link rel="stylesheet" type="text/css" href="~/Form/css/main.css">
+<script src="~/Form/animsition/js/animsition.min.js"></script>
+<script src="~/Table/select/select2.min.js"></script>
+<script src="~/Form/daterangepicker/moment.min.js"></script>
+<script src="~/Form/daterangepicker/daterangepicker.js"></script>
+<script src="~/Form/countdowntime/countdowntime.js"></script>
+<script src="~/Form/noui/nouislider.min.js"></script>
+<script src="~/Form/js/main.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<!--===============================================================================================-->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTsGPiFNyGh8NSk8yRT6J_UafU-XcwIGw&libraries=places&callback=initMap"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTsGPiFNyGh8NSk8yRT6J_UafU-XcwIGw&libraries=places"></script>
 <script>
@@ -130,15 +149,14 @@
             var type = "";
             for (var i = 0; i < queries.length; i++) {
                 for (var j = 0; j < results[0].types.length; j++) {
-                    if(results[0].types[j] === queries[i])
-                    {
+                    if (results[0].types[j] === queries[i]) {
                         type = queries[i];
                         break;
                     }
                 }
             }
             for (var i = 0; i < results.length; i++) {
-                places.push({ "name": results[i].name,"lat":results[i].geometry.location.lat(),"lng":results[i].geometry.location.lng()});
+                places.push({ "name": results[i].name, "lat": results[i].geometry.location.lat(), "lng": results[i].geometry.location.lng() });
             }
             document.getElementById(type).value = JSON.stringify(places);
         }
@@ -150,48 +168,62 @@
     document.bind("projectLoadComplete", initMap);
 </script>
 
-@using( Html.BeginForm( "Create", "Property", FormMethod.Post, new { @class = "form-horizontal", role = "form" } ) )
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new property.</h4>
-    <hr />
-    @Html.ValidationSummary( "", new { @class = "text-danger" } )
-    <div class="form-group">
-        @Html.LabelFor( m => m.Area, new { @class = "col-md-2 control-label" } )
-        <div class="col-md-10">
-            @Html.TextBoxFor( m => m.Area, new { @class = "form-control" } )
-        </div>
-    </div>
-        <div class="form-group">
-            @Html.LabelFor( m => m.Category, new { @class = "col-md-2 control-label" } )
-            <div class="col-md-10">
-                @Html.DropDownListFor( m => m.Category, Model.Categories, new { @class = "form-control" } )
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">Pick loction from map</label>
-            <div class="col-md-10">
-                <input id="pac_input" class="controls" type="text" placeholder="Search Box"><br />
-                <div id="map" style="width: 100%; height: 400px; border: 5px solid #5E5454;"></div>
-            </div>
-        </div>
-        <div>
-            @Html.HiddenFor( m => m.Latitude )
-            @Html.HiddenFor( m => m.Longitude )
-            @Html.HiddenFor( m => m.church )
-            @Html.HiddenFor( m => m.school )
-            @Html.HiddenFor( m => m.train_station )
-            @Html.HiddenFor( m => m.hindu_temple )
-            @Html.HiddenFor( m => m.hospital )
-            @Html.HiddenFor( m => m.mosque )
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Add Property" />
-            </div>
-        </div>
-}
+<div class="container-contact100">
+    <div class="wrap-contact100">
+        @using( Html.BeginForm( "Create", "Property", FormMethod.Post, new { @class = "contact100-form validate-form", role = "form", enctype = "multipart/form-data" } ) )
+        {
+            @Html.AntiForgeryToken()
+            <span class="contact100-form-title">
+                Add Property
+            </span>
+            @Html.ValidationSummary( "", new { @class = "text-danger" } )
 
+            <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Enter plot area">
+                <span class="label-input100">Area *</span>
+                @Html.TextBoxFor( m => m.Area, new { @class = "input100", @placeholder = "Area" } )
+            </div>
+
+            <div class="wrap-input100 input100-select bg1 rs1-wrap-input100">
+                <span class="label-input100">Category *</span>
+                <div>
+                    @Html.DropDownListFor( m => m.Category, Model.Categories, new { @class = "form-control" } )
+                </div>
+            </div>
+            <div class="wrap-input100 bg1 rs1-wrap-input100">
+                <span class="label-input100">Minimum Land Price</span>
+                @Html.TextBoxFor( m => m.LandPrice, new { @class = "input100", @placeholder = "Minimum price for Land" } )
+            </div>
+            <div class="wrap-input100 bg1 rs1-wrap-input100">
+                <span class="label-input100">Minimum Apartment Price</span>
+                @Html.TextBoxFor( m => m.HousePrice, new { @class = "input100", @placeholder = "Minimum price for Apartment" } )
+            </div>
+            <div class="wrap-input100 bg1">
+                <span class="label-input100">Pick loction from map</span>
+                <input id="pac_input" class="controls" type="text" placeholder="Search Box"><br />
+                <div id="map" style="width: 100%; height: 400px; border: 1px solid #5E5454; border-radius:2px; margin-bottom:15px;"></div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor( model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" } )
+                <div class="col-md-10">
+                    @Html.TextBoxFor( model => model.Images, "", new { @type = "file", @multiple = "multiple" } )
+                </div>
+            </div>
+            <div>
+                @Html.HiddenFor( m => m.Latitude )
+                @Html.HiddenFor( m => m.Longitude )
+                @Html.HiddenFor( m => m.church )
+                @Html.HiddenFor( m => m.school )
+                @Html.HiddenFor( m => m.train_station )
+                @Html.HiddenFor( m => m.hindu_temple )
+                @Html.HiddenFor( m => m.hospital )
+                @Html.HiddenFor( m => m.mosque )
+            </div>
+            <div class="container-contact100-form-btn">
+                <input type="submit" class="contact100-form-btn" value="Add Property &raquo;" />
+            </div>
+        }
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render( "~/bundles/jqueryval" )
 }

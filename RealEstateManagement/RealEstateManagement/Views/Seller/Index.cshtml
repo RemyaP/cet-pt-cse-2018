@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Seller";
 }
-<h2>@ViewBag.Title.</h2>
+<br/>
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="~/Table/fonts/Awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="~/Table/css/animate.css" />
@@ -12,8 +12,10 @@
 <script src="~/Table/js/main.js"></script>
 <link rel="stylesheet" type="text/css" href="~/Table/css/util.css"/>
 <link rel="stylesheet" type="text/css" href="~/Table/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="~/Table/css/buttons.css" />
 <!--===============================================================================================-->
-<div class="limiter">
+@Html.ActionLink( "Add Property", "Add", "Property", new { area = "" }, new { @class = "btn btn-default" } )
+<div class="limiter">    
     <div class="wrap-table100">
         <div class="table100">
             <table>
@@ -23,10 +25,7 @@
                         <th class="column2">Area</th>
                         <th class="column3" colspan="2">Location</th>
                         <th class="column4">Type</th>
-                        <th class="column4">Status</th>
-                        <th class="column5">
-                            @Html.ActionLink( "Add", "Add", "Property", new { area = "" }, new { @class = "button button-rounded button-primary" } )
-                        </th>
+                        <th class="column6">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,11 +43,9 @@
                             </td>
                             <td class="column4">@item.Longitude</td>
                             <td class="column5">@item.Type</td>
-                            <td class="column5">@item.Status</td>
-                            <td class="column6"></td>
+                            <td class="column6">@item.Status</td>
                         </tr>
                     }
-
                 </tbody>
             </table>
         </div>

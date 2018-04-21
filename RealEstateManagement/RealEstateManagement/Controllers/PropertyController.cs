@@ -49,7 +49,7 @@ namespace RealEstateManagement.Controllers
             catch( Exception ex )
             {
             }
-            return RedirectToAction( "Index", "Seller" );
+            return View( "Add", model );
         }
     }
 }
