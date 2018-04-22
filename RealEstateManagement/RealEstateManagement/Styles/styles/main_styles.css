@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -1906,4 +1906,8 @@ section
 {
 	color: #485165;
 	line-height: 49px;
+}
+.short
+{
+    height:25px !important;
 }
