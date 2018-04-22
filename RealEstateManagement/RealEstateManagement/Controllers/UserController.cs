@@ -34,7 +34,7 @@ namespace RealEstateManagement.Controllers
                         System.Web.HttpContext.Current.Session["UserId"] = model.UserId;
                         if( UserType.Buyer == model.Type )
                         {
-                            return RedirectToAction( "Index", "Home" );
+                            return RedirectToAction( "Index", "Buyer" );
                         }
                         else
                         {
@@ -71,7 +71,7 @@ namespace RealEstateManagement.Controllers
                         System.Web.HttpContext.Current.Session["UserId"] = model.UserId;
                         if( UserType.Buyer == model.Type )
                         {
-                            return RedirectToAction( "Index", "Home" );
+                            return RedirectToAction( "Index", "Buyer" );
                         }
                         else
                         {

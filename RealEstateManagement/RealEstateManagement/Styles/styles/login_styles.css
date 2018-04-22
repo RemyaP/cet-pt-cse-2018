@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -664,6 +664,14 @@ section
 	display: block;
 	width: 100%;
 }
+.dropdown_item_login
+{
+	display: block;
+	margin-left: 30px;
+	margin-right: 30px;
+	margin-bottom: 10px;
+	float:none;
+}
 .dropdown_item
 {
 	display: block;
@@ -690,7 +698,7 @@ section
 }
 .dropdown_item_select
 {
-	width: 100%;
+	width: 69%;
 	height: 34px;
 	background: #FFFFFF;
 	-webkit-appearance:none;
@@ -738,6 +746,21 @@ section
 }
 .login_submit_button
 {
+	width: 100%;
+	height: 34px;
+    text-align: center;
+	background: #fd784f;
+	border: none;
+	font-size: 11px;
+	font-weight: 400;
+	color: #FFFFFF;
+	line-height: 34px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.Register_submit_button
+{
 	width: 97px;
 	height: 34px;
 	background: #fd784f;
@@ -749,6 +772,7 @@ section
 	text-transform: uppercase;
 	cursor: pointer;
 }
+
 .login_features_container
 {
 	padding-left: 30px;

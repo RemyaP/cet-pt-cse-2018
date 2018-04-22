@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /******************************
@@ -889,6 +889,14 @@ section
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
+}
+.listing_photo
+{
+	/*position: absolute;
+	top: 0;
+	left: 0;*/
+	width: 350px;
+	height: 295px;
 }
 .listing_content
 {

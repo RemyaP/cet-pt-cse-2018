@@ -76,6 +76,7 @@ namespace RealEstateManagement.Models
         public string mosque { get; set; }
         public double LandPrice { get; set; }
         public double HousePrice { get; set; }
+        public List<string> Photos { get; set; }
 
         [Display( Name = "Browse" )]
         public HttpPostedFileBase[] Images { get; set; }
@@ -85,12 +86,30 @@ namespace RealEstateManagement.Models
             PropertyId = prop.property_id;
             Name = prop.name;
             Area = prop.area;
+            LandPrice = (double)prop.min_price.plot_price;
+            HousePrice = (double)prop.min_price.apartment_price;
             Latitude = prop.latitude;
             Longitude = prop.longitude;
             SellerId = prop.seller_id;
             Category = prop.category;
             Type = prop.category1.type;
             Status = prop.propery_status.status;
+            if( null != Photos ) Photos.Clear();
+            else Photos = new List<string>();
+            foreach(var image in prop.images)
+            {
+                byte[] photo = image.image1;
+                string imageSrc = null;
+                if( photo != null )
+                {
+                    MemoryStream ms = new MemoryStream();
+                    ms.Write( photo, 0, photo.Length );
+                    //ms.Write( photo, 78, photo.Length - 78 ); // strip out 78 byte OLE header (don't need to do this for normal images)
+                    string imageBase64 = Convert.ToBase64String(ms.ToArray() );
+                    imageSrc = string.Format( "data:image/gif;base64,{0}", imageBase64 );
+                    Photos.Add( imageSrc );
+                }
+            }
         }
 
         public PropertyViewModel()

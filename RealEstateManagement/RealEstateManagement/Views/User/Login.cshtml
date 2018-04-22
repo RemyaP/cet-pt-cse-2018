@@ -20,22 +20,23 @@
                     @using( Html.BeginForm( "Login", "User", FormMethod.Post, new { @class = "login_form", role = "form" } ) )
                     {
                         <ul class="dropdown_row clearfix">
-                            <li class="dropdown_item dropdown_item">
+                            <li class="dropdown_item_login dropdown_item_login">
                                 <div class="dropdown_item_title">User Name</div>
                                 @Html.EditorFor( model => model.UserName )
                             </li>
                         </ul>
                         <ul class="dropdown_row clearfix">
-                            <li class="dropdown_item dropdown_item">
+                            <li class="dropdown_item_login dropdown_item_login">
                                 <div class="dropdown_item_title">Password</div>
                                 @Html.PasswordFor( model => model.Password )
                             </li>
                         </ul>
 
                         <ul class="dropdown_row clearfix text-center">
-                            <li class="dropdown_item dropdown_item">
+                            <li class="dropdown_item_login dropdown_item_login">
                                 <div class="login_button">
                                     <input value="Login" type="submit" class="login_submit_button">
+                                    <br />
                                     @Html.ActionLink( " Sign Up", "Index", "User" )
                                 </div>
 
