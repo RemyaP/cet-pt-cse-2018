@@ -23,8 +23,8 @@
           <Property Name="apartment_price" Type="double" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6005: The data type 'udouble' is currently not supported for the target Entity Framework version; the column 'min_area' in the table 'def.tmp.buyer' was excluded.
-warning 6005: The data type 'udouble' is currently not supported for the target Entity Framework version; the column 'max_area' in the table 'def.tmp.buyer' was excluded.-->
+warning 6005: The data type 'udouble' is currently not supported for the target Entity Framework version; the column 'min_area' in the table 'def.real_estate.buyer' was excluded.
+warning 6005: The data type 'udouble' is currently not supported for the target Entity Framework version; the column 'max_area' in the table 'def.real_estate.buyer' was excluded.-->
         <EntityType Name="buyer">
           <Key>
             <PropertyRef Name="buyer_id" />
@@ -42,7 +42,7 @@ warning 6005: The data type 'udouble' is currently not supported for the target 
           <Property Name="type" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'def.tmp.images' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'def.real_estate.images' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="images">
           <Key>
             <PropertyRef Name="property_id" />
@@ -77,7 +77,7 @@ warning 6002: The table/view 'def.tmp.images' does not have a primary key define
           <Property Name="apartment_price" Type="double" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6005: The data type 'udouble' is currently not supported for the target Entity Framework version; the column 'area' in the table 'def.tmp.property' was excluded.-->
+warning 6005: The data type 'udouble' is currently not supported for the target Entity Framework version; the column 'area' in the table 'def.real_estate.property' was excluded.-->
         <EntityType Name="property">
           <Key>
             <PropertyRef Name="property_id" />
@@ -304,25 +304,20 @@ warning 6005: The data type 'udouble' is currently not supported for the target 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RealModelStoreContainer">
-          <EntitySet Name="bid" EntityType="Self.bid" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="bid_price" EntityType="Self.bid_price" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="buyer" EntityType="Self.buyer" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="category" EntityType="Self.category" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="landmark" EntityType="Self.landmark" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="landmarktype" EntityType="Self.landmarktype" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="min_price" EntityType="Self.min_price" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="property" EntityType="Self.property" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="property_has_landmark" EntityType="Self.property_has_landmark" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="propery_status" EntityType="Self.propery_status" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="seller" EntityType="Self.seller" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="status" EntityType="Self.status" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="user" EntityType="Self.user" Schema="tmp" store:Type="Tables" />
-          <EntitySet Name="images" EntityType="Self.images" store:Type="Tables" store:Schema="tmp">
-            <DefiningQuery>SELECT
-`images`.`property_id`, 
-`images`.`image`
-FROM `images` AS `images`</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="bid" EntityType="Self.bid" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="bid_price" EntityType="Self.bid_price" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="buyer" EntityType="Self.buyer" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="landmark" EntityType="Self.landmark" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="landmarktype" EntityType="Self.landmarktype" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="min_price" EntityType="Self.min_price" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="property" EntityType="Self.property" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="property_has_landmark" EntityType="Self.property_has_landmark" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="propery_status" EntityType="Self.propery_status" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="seller" EntityType="Self.seller" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="real_estate" store:Type="Tables" />
+          <EntitySet Name="images" EntityType="Self.images" store:Type="Tables" store:Schema="real_estate"/>
           <AssociationSet Name="fk_bid_price_bid1" Association="Self.fk_bid_price_bid1">
             <End Role="bid" EntitySet="bid" />
             <End Role="bid_price" EntitySet="bid_price" />
