@@ -14,9 +14,7 @@ namespace RealEstateManagement.Controllers
         public ActionResult Index()
         {
             SellerViewModel svm = new SellerViewModel();
-            svm.SellerId = 1;
-            long userid = (long)System.Web.HttpContext.Current.Session["UserId"];
-            svm.GetSeller( userid );
+            svm.SellerId = Utils.GetSeller();
             svm.GetProperties();
             return View(svm);
         }

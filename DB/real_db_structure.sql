@@ -179,6 +179,7 @@ DROP TABLE IF EXISTS `property`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `property` (
   `property_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
   `area` double unsigned DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,

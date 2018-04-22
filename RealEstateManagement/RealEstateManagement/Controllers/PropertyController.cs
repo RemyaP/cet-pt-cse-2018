@@ -12,8 +12,6 @@ namespace RealEstateManagement.Controllers
 {
     public class PropertyController : Controller
     {
-        private int seller = 1;
-
         // GET: Property
         public ActionResult Index()
         {
@@ -36,7 +34,7 @@ namespace RealEstateManagement.Controllers
             {
                 if( ModelState.IsValid )
                 {
-                    model.SellerId = seller;
+                    model.SellerId = Utils.GetSeller();
                     if( model.AddProperty() )
                     {
                         return RedirectToAction( "Index", "Seller" );

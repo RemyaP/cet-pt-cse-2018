@@ -60,6 +60,7 @@ namespace RealEstateManagement.Models
     {
         [Key]
         public int PropertyId { get; set; }
+        public string Name { get; set; }
         public double? Area { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
@@ -82,6 +83,7 @@ namespace RealEstateManagement.Models
         public PropertyViewModel( property prop )
         {
             PropertyId = prop.property_id;
+            Name = prop.name;
             Area = prop.area;
             Latitude = prop.latitude;
             Longitude = prop.longitude;
@@ -120,6 +122,7 @@ namespace RealEstateManagement.Models
                 property prop = new property();
                 List<Marker> markers = GetMarkers();
                 RealEntities db = new RealEntities();
+                prop.name = Name;
                 prop.area = Area;
                 prop.latitude = Latitude;
                 prop.longitude = Longitude;

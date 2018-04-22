@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = "Create";
 }
+<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="~/Styles/styles/login_styles.css">
+<!--===============================================================================================-->
 <div class="login_box">
     <div class="row">
         <div class="col">
@@ -22,7 +24,7 @@
                         <ul class="dropdown_row clearfix">
                             <li class="dropdown_item dropdown_item">
                                 <div class="dropdown_item_title">User Name</div>
-                                @Html.EditorFor( model => model.UserName)
+                                @Html.EditorFor( model => model.UserName )
                             </li>
                         </ul>
                         <ul class="dropdown_row clearfix">
@@ -64,19 +66,43 @@
                         <ul class="dropdown_row clearfix">
                             <li class="dropdown_item dropdown_item">
                                 <div class="dropdown_item_title">PAN Number</div>
-                                @Html.EditorFor( model => model.PAN)
+                                @Html.EditorFor( model => model.PAN )
                             </li>
                         </ul>
                         <ul class="dropdown_row clearfix">
                             <li class="dropdown_item dropdown_item">
                                 <div class="dropdown_item_title">Email</div>
-                                @Html.EditorFor( model => model.Email)
+                                @Html.EditorFor( model => model.Email )
                             </li>
                         </ul>
                         <ul class="dropdown_row clearfix">
                             <li class="dropdown_item dropdown_item">
                                 <div class="dropdown_item_title">Register as</div>
                                 @Html.DropDownListFor( model => model.Type, EnumHelper.GetSelectList( typeof( RealEstateManagement.Models.UserType ) ), new { @class = "dropdown_item_select" } )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Minimum Price</div>
+                                @Html.EditorFor( model => model.MinCost )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Maximum Price</div>
+                                @Html.EditorFor( model => model.MaxCost )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Minimum Area</div>
+                                @Html.EditorFor( model => model.MinArea )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Maximum Area</div>
+                                @Html.EditorFor( model => model.MaxArea )
                             </li>
                         </ul>
                         <ul class="dropdown_row clearfix text-center">

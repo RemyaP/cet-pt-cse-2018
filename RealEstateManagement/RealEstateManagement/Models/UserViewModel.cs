@@ -21,6 +21,10 @@ namespace RealEstateManagement.Models
         public string Mob { get; set; }
         public string Email { get; set; }
         public int Status { get; set; }
+        public long MinCost { get; set; }
+        public long MaxCost { get; set; }
+        public double MinArea { get; set; }
+        public double MaxArea { get; set; }
         public UserType Type { get; set; }
 
         public bool RegisterUser()
@@ -47,6 +51,10 @@ namespace RealEstateManagement.Models
                         {
                             buyer b = new buyer();
                             b.user_id = u.user_id;
+                            b.max_area = MaxArea;
+                            b.min_area = MinArea;
+                            b.min_cost = MinCost;
+                            b.max_cost = MaxCost;
                             db.buyers.Add( b );
                             break;
                         }
@@ -54,6 +62,10 @@ namespace RealEstateManagement.Models
                         {
                             buyer b = new buyer();
                             b.user_id = u.user_id;
+                            b.max_area = MaxArea;
+                            b.min_area = MinArea;
+                            b.min_cost = MinCost;
+                            b.max_cost = MaxCost;
                             db.buyers.Add( b );
                             seller s = new seller();
                             s.seller_type = 2;

@@ -32,15 +32,5 @@ namespace RealEstateManagement.Models
                 }
             }
         }
-
-        public void GetSeller( long userid )
-        {
-            using( RealEntities db = new RealEntities() )
-            {
-                seller seller = db.sellers.Where( s => s.user_id == userid ).FirstOrDefault();
-                SellerId = seller.seller_id;
-                SellerType = ( SellerType )seller.seller_type;
-            }
-        }
     }
 }

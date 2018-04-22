@@ -22,8 +22,8 @@
                 <thead>
                     <tr class="table100-head">
                         <th class="column1">PropertyId</th>
-                        <th class="column2">Area</th>
-                        <th class="column3" colspan="2">Location</th>
+                        <th class="column2">Name</th>
+                        <th class="column3">Area</th>
                         <th class="column4">Type</th>
                         <th class="column6">Status</th>
                     </tr>
@@ -35,14 +35,13 @@
                             <td class="column1">
                                 @item.PropertyId
                             </td>
-                            <td class="column2">
-                                @item.Area
+                            <td class="column3">
+                                @item.Name
                             </td>
                             <td class="column3">
-                                @item.Latitude
+                                @item.Area
                             </td>
-                            <td class="column4">@item.Longitude</td>
-                            <td class="column5">@item.Type</td>
+                            <td class="column4">@item.Type</td>
                             <td class="column6">@item.Status</td>
                         </tr>
                     }
