@@ -24,10 +24,13 @@ namespace RealEstateManagement.Models
                     properties = db.properties.Where( p => p.area <= buyer.max_area && p.area >= buyer.min_area && (p.min_price.plot_price + p.min_price.apartment_price) <= buyer.max_cost && ( p.min_price.plot_price + p.min_price.apartment_price ) >= buyer.min_cost).ToList<property>();
                 }
                 if( null == Properties ) Properties = new List<PropertyViewModel>();
-                foreach( var property in properties )
+                if( null != properties )
                 {
-                    PropertyViewModel pm = new PropertyViewModel(property);
-                    Properties.Add( pm );
+                    foreach( var property in properties )
+                    {
+                        PropertyViewModel pm = new PropertyViewModel(property);
+                        Properties.Add( pm );
+                    }
                 }
             }
         }

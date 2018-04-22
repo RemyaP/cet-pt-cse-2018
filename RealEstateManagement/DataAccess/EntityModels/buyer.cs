@@ -22,6 +22,8 @@ namespace DataAccess.EntityModels
         public int buyer_id { get; set; }
         public Nullable<long> min_cost { get; set; }
         public Nullable<long> max_cost { get; set; }
+        public Nullable<double> min_area { get; set; }
+        public Nullable<double> max_area { get; set; }
         public long user_id { get; set; }
     
         public virtual ICollection<bid> bids { get; set; }

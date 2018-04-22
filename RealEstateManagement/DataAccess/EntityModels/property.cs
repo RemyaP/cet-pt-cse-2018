@@ -22,6 +22,7 @@ namespace DataAccess.EntityModels
         }
     
         public int property_id { get; set; }
+        public string name { get; set; }
         public Nullable<double> latitude { get; set; }
         public Nullable<double> longitude { get; set; }
         public Nullable<double> area { get; set; }

@@ -25,10 +25,13 @@ namespace RealEstateManagement.Models
             {
                 var properties = db.properties.Where( p => p.seller_id == SellerId ).ToList<property>();
                 if( null == Properties ) Properties = new List<PropertyViewModel>();
-                foreach( var property in properties )
+                if( null != properties )
                 {
-                    PropertyViewModel pm = new PropertyViewModel(property);
-                    Properties.Add( pm );
+                    foreach( var property in properties )
+                    {
+                        PropertyViewModel pm = new PropertyViewModel(property);
+                        Properties.Add( pm );
+                    }
                 }
             }
         }

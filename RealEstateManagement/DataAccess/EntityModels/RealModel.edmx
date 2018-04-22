@@ -32,6 +32,8 @@ warning 6005: The data type 'udouble' is currently not supported for the target 
           <Property Name="buyer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="min_cost" Type="uint" />
           <Property Name="max_cost" Type="uint" />
+          <Property Name="min_area" Type="double" />
+          <Property Name="max_area" Type="double" />
           <Property Name="user_id" Type="uint" Nullable="false" />
         </EntityType>
         <EntityType Name="category">
@@ -83,6 +85,7 @@ warning 6005: The data type 'udouble' is currently not supported for the target 
             <PropertyRef Name="property_id" />
           </Key>
           <Property Name="property_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
           <Property Name="latitude" Type="double" />
           <Property Name="longitude" Type="double" />
           <Property Name="area" Type="double" />
@@ -408,6 +411,8 @@ warning 6005: The data type 'udouble' is currently not supported for the target 
           <Property Name="buyer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="min_cost" Type="Int64" />
           <Property Name="max_cost" Type="Int64" />
+          <Property Name="min_area" Type="Double" />
+          <Property Name="max_area" Type="Double" />
           <Property Name="user_id" Type="Int64" Nullable="false" />
           <NavigationProperty Name="bids" Relationship="Self.fk_purchase_buyer1" FromRole="buyer" ToRole="bid" />
           <NavigationProperty Name="user" Relationship="Self.fk_buyer_user1" FromRole="buyer" ToRole="user" />
@@ -454,6 +459,7 @@ warning 6005: The data type 'udouble' is currently not supported for the target 
             <PropertyRef Name="property_id" />
           </Key>
           <Property Name="property_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="latitude" Type="Double" />
           <Property Name="longitude" Type="Double" />
           <Property Name="area" Type="Double" />
@@ -767,6 +773,8 @@ warning 6005: The data type 'udouble' is currently not supported for the target 
                 <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
                 <ScalarProperty Name="min_cost" ColumnName="min_cost" />
                 <ScalarProperty Name="max_cost" ColumnName="max_cost" />
+                <ScalarProperty Name="min_area" ColumnName="min_area" />
+                <ScalarProperty Name="max_area" ColumnName="max_area" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -811,6 +819,7 @@ warning 6005: The data type 'udouble' is currently not supported for the target 
             <EntityTypeMapping TypeName="IsTypeOf(RealModel.property)">
               <MappingFragment StoreEntitySet="property">
                 <ScalarProperty Name="property_id" ColumnName="property_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="seller_id" ColumnName="seller_id" />

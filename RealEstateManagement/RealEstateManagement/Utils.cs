@@ -11,11 +11,15 @@ namespace RealEstateManagement
         public static int GetSeller()
         {
             int sellerid = 0;
-            long userid = (long)System.Web.HttpContext.Current.Session["UserId"];
-            using( RealEntities db = new RealEntities() )
+            Object user = System.Web.HttpContext.Current.Session["UserId"];
+            if( null != user )
             {
-                seller seller = db.sellers.Where( s => s.user_id == userid ).FirstOrDefault();
-                sellerid = seller.seller_id;
+                long userid = (long)user;
+                using( RealEntities db = new RealEntities() )
+                {
+                    seller seller = db.sellers.Where( s => s.user_id == userid ).FirstOrDefault();
+                    sellerid = seller.seller_id;
+                }
             }
             return sellerid;
         }
@@ -23,18 +27,27 @@ namespace RealEstateManagement
         public static int GetBuyer()
         {
             int buyerid = 0;
-            long userid = (long)System.Web.HttpContext.Current.Session["UserId"];
-            using( RealEntities db = new RealEntities() )
+            Object user = System.Web.HttpContext.Current.Session["UserId"];
+            if( null != user )
             {
-                buyer buyer = db.buyers.Where( b => b.user_id == userid ).FirstOrDefault();
-                buyerid = buyer.buyer_id;
+                long userid = (long)user;
+                using( RealEntities db = new RealEntities() )
+                {
+                    buyer buyer = db.buyers.Where( b => b.user_id == userid ).FirstOrDefault();
+                    buyerid = buyer.buyer_id;
+                }
             }
             return buyerid;
         }
 
         public static long GetUser()
         {
-            long userid = (long)System.Web.HttpContext.Current.Session["UserId"];
+            long userid = 0;
+            Object user = System.Web.HttpContext.Current.Session["UserId"];
+            if( null != user )
+            {
+                userid = ( long )user;
+            }
             return userid;
         }
     }
