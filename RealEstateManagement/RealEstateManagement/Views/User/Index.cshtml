@@ -1,0 +1,100 @@
+﻿@model RealEstateManagement.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+<link rel="stylesheet" type="text/css" href="~/Styles/styles/login_styles.css">
+<div class="login_box">
+    <div class="row">
+        <div class="col">
+            <div class="login_box_outer">
+                <div class="login_box_inner">
+                    <!-- register Box Title -->
+                    <div class="login_box_title text-center">
+                        <div class="login_box_title_inner">
+                            <span>Register Here</span>
+                        </div>
+                    </div>
+
+                    <!-- register Form -->
+                    @using( Html.BeginForm( "Create", "User", FormMethod.Post, new { @class = "login_form", role = "form" } ) )
+                    {
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">User Name</div>
+                                @Html.EditorFor( model => model.UserName)
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Password</div>
+                                @Html.PasswordFor( model => model.Password )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Confirm Password</div>
+                                <input type="password" name="Reg_confpwd" />
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">First Name</div>
+                                @Html.EditorFor( model => model.FirstName )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Last Name</div>
+                                @Html.EditorFor( model => model.LastName )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Address</div>
+                                @Html.TextAreaFor( model => model.Address )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Phone</div>
+                                @Html.EditorFor( model => model.Mob )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">PAN Number</div>
+                                @Html.EditorFor( model => model.PAN)
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Email</div>
+                                @Html.EditorFor( model => model.Email)
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Register as</div>
+                                @Html.DropDownListFor( model => model.Type, EnumHelper.GetSelectList( typeof( RealEstateManagement.Models.UserType ) ), new { @class = "dropdown_item_select" } )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix text-center">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="login_button">
+                                    <input value="Register" type="submit" class="login_submit_button">
+                                </div>
+
+                            </li>
+
+                        </ul>
+                        <ul class="dropdown_row clearfix text-center">
+                            <li></li>
+                        </ul>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

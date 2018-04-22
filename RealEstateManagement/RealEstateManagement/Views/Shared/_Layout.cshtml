@@ -92,8 +92,8 @@
                                     <li class="main_nav_item">@Html.ActionLink( "Home", "Index", "Home" )</li>
                                     <li class="main_nav_item">@Html.ActionLink( "About", "About", "Home" )</li>
                                     <li class="main_nav_item">@Html.ActionLink( "Contact", "Contact", "Home" )</li>
-                                    <li class="main_nav_item"><a href="login.html">login</a></li>
-                                    <li class="main_nav_item"><a href="Register.html">register</a></li>
+                                    <li class="main_nav_item">@Html.ActionLink( "Login", "Login", "User" )</li>
+                                    <li class="main_nav_item">@Html.ActionLink( "Register", "Index", "User" )</li>
                                     <li class="main_nav_item">@Html.ActionLink( "Seller", "Index", "Seller" )</li>
                                 </ul>
                             </nav>
@@ -216,5 +216,6 @@
     <script src="~/Styles/plugins/scrollTo/jquery.scrollTo.min.js"></script>
     <script src="~/Styles/plugins/easing/easing.js"></script>
     <script src="~/Styles/js/custom.js"></script>
+
 </body>
 </html>

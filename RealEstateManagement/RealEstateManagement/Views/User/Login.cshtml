@@ -1,0 +1,54 @@
+﻿@model RealEstateManagement.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+<link rel="stylesheet" type="text/css" href="~/Styles/styles/login_styles.css">
+<div class="login_box">
+    <div class="row">
+        <div class="col">
+            <div class="login_box_outer">
+                <div class="login_box_inner">
+                    <!-- register Box Title -->
+                    <div class="login_box_title text-center">
+                        <div class="login_box_title_inner">
+                            <span>Login Here</span>
+                        </div>
+                    </div>
+
+                    <!-- register Form -->
+                    @using( Html.BeginForm( "Login", "User", FormMethod.Post, new { @class = "login_form", role = "form" } ) )
+                    {
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">User Name</div>
+                                @Html.EditorFor( model => model.UserName )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="dropdown_item_title">Password</div>
+                                @Html.PasswordFor( model => model.Password )
+                            </li>
+                        </ul>
+
+                        <ul class="dropdown_row clearfix text-center">
+                            <li class="dropdown_item dropdown_item">
+                                <div class="login_button">
+                                    <input value="Login" type="submit" class="login_submit_button">
+                                    @Html.ActionLink( " Sign Up", "Index", "User" )
+                                </div>
+
+                            </li>
+
+                        </ul>
+                        <ul class="dropdown_row clearfix text-center">
+                            <li></li>
+                        </ul>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

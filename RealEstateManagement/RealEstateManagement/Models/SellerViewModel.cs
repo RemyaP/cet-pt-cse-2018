@@ -9,7 +9,7 @@ namespace RealEstateManagement.Models
 {
     public enum SellerType
     {
-        Seller,
+        Seller = 1,
         BuyerSeller
     }
     public class SellerViewModel
@@ -30,6 +30,16 @@ namespace RealEstateManagement.Models
                     PropertyViewModel pm = new PropertyViewModel(property);
                     Properties.Add( pm );
                 }
+            }
+        }
+
+        public void GetSeller( long userid )
+        {
+            using( RealEntities db = new RealEntities() )
+            {
+                seller seller = db.sellers.Where( s => s.user_id == userid ).FirstOrDefault();
+                SellerId = seller.seller_id;
+                SellerType = ( SellerType )seller.seller_type;
             }
         }
     }
