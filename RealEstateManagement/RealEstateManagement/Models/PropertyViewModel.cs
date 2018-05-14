@@ -56,6 +56,8 @@ namespace RealEstateManagement.Models
         private string _name;
     }
 
+    public enum PropertyStatus { Open = 1, Started, Closed, Sold }
+
     public class PropertyViewModel
     {
         [Key]
@@ -77,17 +79,31 @@ namespace RealEstateManagement.Models
         public double LandPrice { get; set; }
         public double HousePrice { get; set; }
         public List<string> Photos { get; set; }
+        public List<BidVieModel> Bids { get; set; }
+        public BidVieModel Bid { get; set; }
 
         [Display( Name = "Browse" )]
         public HttpPostedFileBase[] Images { get; set; }
 
+        public PropertyViewModel( int PropertyId )
+        {
+            RealEntities db = new RealEntities();
+            property prop = db.properties.Where( p => p.property_id == PropertyId ).FirstOrDefault();
+            InitialiseProperty( prop );
+        }
+
         public PropertyViewModel( property prop )
+        {
+            InitialiseProperty( prop );
+        }
+
+        private void InitialiseProperty( property prop )
         {
             PropertyId = prop.property_id;
             Name = prop.name;
             Area = prop.area;
-            LandPrice = (double)prop.min_price.plot_price;
-            HousePrice = (double)prop.min_price.apartment_price;
+            LandPrice = ( double )prop.min_price.plot_price;
+            HousePrice = ( double )prop.min_price.apartment_price;
             Latitude = prop.latitude;
             Longitude = prop.longitude;
             SellerId = prop.seller_id;
@@ -96,7 +112,7 @@ namespace RealEstateManagement.Models
             Status = prop.propery_status.status;
             if( null != Photos ) Photos.Clear();
             else Photos = new List<string>();
-            foreach(var image in prop.images)
+            foreach( var image in prop.images )
             {
                 byte[] photo = image.image1;
                 string imageSrc = null;
@@ -132,6 +148,83 @@ namespace RealEstateManagement.Models
             {
                 _categories = new SelectList( CategoryViewModel.GetCategories(), "Key", "Value" );
             }
+        }
+
+        public bool ChangeStatus( PropertyStatus status )
+        {
+            try
+            {
+                RealEntities db = new RealEntities();
+                property prop = db.properties.Where( p => p.property_id == PropertyId ).FirstOrDefault();
+                prop.status = ( int )status;
+                db.SaveChanges();
+                return true;
+            }
+            catch( Exception ex )
+            {
+            }
+            return false;
+        }
+
+        public bool GetBids()
+        {
+            if( null != Bids ) Bids.Clear();
+            else Bids = new List<BidVieModel>();
+            try
+            {
+                RealEntities db = new RealEntities();
+                var bids = db.bids.Where( b => b.property_id == PropertyId );
+                if( null != bids )
+                {
+                    foreach( var b in bids )
+                    {
+                        BidVieModel bid = new BidVieModel();
+                        bid.BidId = b.bid_id;
+                        bid.PropertyId = b.property_id;
+                        bid.BuyerId = b.buyer_id;
+                        bid.Status = ( BidStatus )b.status;
+                        //bid.LandPrice = ( double )b.bid_price.plot_price;
+                        //bid.HousePrice = ( double )b.bid_price.apartment_price;
+                        //bid.BuyerName = b.buyer.user.first_name + " " + b.buyer.user.last_name;
+                        //bid.BuyerAddress = b.buyer.user.address;
+                        Bids.Add( bid );
+                    }
+                }
+                return true;
+            }
+            catch( Exception ex )
+            {
+            }
+            return false;
+        }
+
+
+        public bool GetHighestUniqueBid()
+        {
+            Bid = null;
+            try
+            {
+                RealEntities db = new RealEntities();
+                var bids = db.bids.Where(b => b.property_id == PropertyId).GroupBy( b => (b.bid_price.plot_price + b.bid_price.apartment_price) ).Where( b => (b.Count() == 1 )).FirstOrDefault();
+                if( null == bids ) return false;
+                var bid = bids.FirstOrDefault();
+                if( null == bid ) return false;
+                Bid = new BidVieModel();
+
+                Bid.BidId = bid.bid_id;
+                Bid.PropertyId = bid.property_id;
+                Bid.BuyerId = bid.buyer_id;
+                Bid.Status = ( BidStatus )bid.status;
+                Bid.LandPrice = ( double )bid.bid_price.plot_price;
+                Bid.HousePrice = ( double )bid.bid_price.apartment_price;
+                Bid.BuyerName = bid.buyer.user.first_name + " " + bid.buyer.user.last_name;
+                Bid.BuyerAddress = bid.buyer.user.address;
+                return true;
+            }
+            catch( Exception ex )
+            {
+            }
+            return false;
         }
 
         public bool AddProperty()
@@ -190,7 +283,7 @@ namespace RealEstateManagement.Models
                         ldb.landmarks.Add( lm );
                         ldb.SaveChanges();
                     }
-                    if( 0 != lm.landmark_id) 
+                    if( 0 != lm.landmark_id )
                     {
                         landmark mark = db.landmarks.Where( l => l.landmark_id == lm.landmark_id).Single();
                         db.landmarks.Attach( mark );

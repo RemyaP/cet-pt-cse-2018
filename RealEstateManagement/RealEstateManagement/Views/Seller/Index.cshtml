@@ -53,6 +53,17 @@
                                 </div>
                                 <div class="room_tags">
                                     <span class="room_tag"><a href="#">@item.Type</a></span>
+                                    <br />
+                                    @if( "Open" == item.Status || "Closed" == item.Status )
+                                    {
+                                        @Html.ActionLink( "Start Bid", "StartBid", "Property", new { PropertyId = item.PropertyId }, new { @class = "button button-primary button-small bid_link" } )
+                                        
+                                    }
+                                    else if( "Started" == item.Status )
+                                    {
+                                        @Html.ActionLink( "Close Bid", "CloseBid", "Property", new { PropertyId = item.PropertyId }, new { @class = "button button-primary button-small bid_link" } )
+                                        @Html.ActionLink( "View Bids", "ViewBid", "Property", new { PropertyId = item.PropertyId }, new { @class = "button button-primary button-small bid_link" } )
+                                    }
                                 </div>
                             </div>
                         </div>

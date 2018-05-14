@@ -1,6 +1,6 @@
-﻿@model RealEstateManagement.Models.BuyerViewModel
+﻿@model RealEstateManagement.Models.PropertyViewModel
 @{
-    ViewBag.Title = "Seller";
+    ViewBag.Title = "ViewBid";
 }
 <br />
 <!--===============================================================================================-->
@@ -8,17 +8,18 @@
 <link rel="stylesheet" type="text/css" href="~/Styles/styles/listings_responsive.css" />
 <link rel="stylesheet" type="text/css" href="~/Styles/styles/buttons.css" />
 <!--===============================================================================================-->
+
 <div class="listings">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 listings_col">
-                @foreach( var item in Model.Properties )
+                @foreach( var item in Model.Bids )
                 {
                     double price = item.HousePrice + item.LandPrice;
                     string url ="";
-                    if( null != item.Photos && item.Photos.Count > 0 )
+                    if( null != Model.Photos && Model.Photos.Count > 0 )
                     {
-                        url = item.Photos[0];
+                        url = Model.Photos[0];
                     }
                     <div class="listing_item">
                         <div class="listing_item_inner d-flex flex-md-row flex-column trans_300">
@@ -35,25 +36,21 @@
                                 </div>
                             </div>
                             <div class="listing_content">
-                                <div class="listing_title"><a href="listings_single.html">@item.Name</a></div>
-                                <div class="listing_text">Land Price: @item.LandPrice <br />Apartment Price: @item.HousePrice</div>
+                                <div class="listing_title"><a href="listings_single.html">@item.BuyerName</a></div>
+                                <div class="listing_text">Land Price: @item.BuyerAddress</div>
                                 <div class="rooms">
                                     <div class="room">
                                         <span class="room_title">Area</span>
                                         <div class="room_content">
                                             <div class="room_image"><img src="~/Styles/images/area.png" alt=""></div>
-                                            <span class="room_number">@item.Area Sq Ft</span>
+                                            <span class="room_number">@Model.Area Sq Ft</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="room_tags">
-                                    <span class="room_tag"><a href="#">@item.Type</a></span>
+                                    <span class="room_tag"><a href="#">@Model.Type</a></span>
                                     <br />
-                                    @if( "Started" == item.Status )
-                                    {
-                                        @Html.ActionLink( "Bid", "BidView", "Property", new { PropertyId = item.PropertyId }, new { @class = "button button-primary button-small bid_link" } )
-
-                                    }
+                                    @Html.ActionLink( "Confirm Bid", "ConfirmBid", "Property", new { BidId = item.BidId }, new { @class = "button button-primary button-small bid_link" } )
                                 </div>
                             </div>
                         </div>

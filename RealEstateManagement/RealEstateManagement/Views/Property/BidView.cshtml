@@ -1,0 +1,113 @@
+﻿@model RealEstateManagement.Models.PropertyViewModel
+@{
+    ViewBag.Title = "BidView";
+}
+<br />
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="~/Styles/styles/listings_styles.css" />
+<link rel="stylesheet" type="text/css" href="~/Styles/styles/listings_responsive.css" />
+<link rel="stylesheet" type="text/css" href="~/Styles/styles/buttons.css" />
+<link rel="stylesheet" type="text/css" href="~/Styles/styles/login_styles.css">
+<!--===============================================================================================-->
+
+<div class="listings">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 listings_col">
+                @if( Model.Bid != null )
+                {
+                    var item = Model.Bid;
+                    double price = item.HousePrice + item.LandPrice;
+                    string url ="";
+                    if( null != Model.Photos && Model.Photos.Count > 0 )
+                    {
+                        url = Model.Photos[0];
+                    }
+                    <div class="listing_item">
+                        <div class="listing_item_inner d-flex flex-md-row flex-column trans_300">
+                            <div class="listing_image_container">
+                                <div class="listing_image">
+                                    <div class="listing_background"><img src="@url" alt="" class="listing_photo"></div>
+                                </div>
+                                <div class="featured_card_box d-flex flex-row align-items-center trans_300">
+                                    <img src="~/Styles/images/tag.svg" alt="https://www.flaticon.com/authors/lucy-g">
+                                    <div class="featured_card_box_content">
+                                        <div class="featured_card_price_title trans_300">@item.Status</div>
+                                        <div class="featured_card_price trans_300">Rs. @price</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listing_content">
+                                <div class="listing_title"><a href="listings_single.html">@item.BuyerName</a></div>
+                                <div class="listing_text">Land Price: @item.BuyerAddress</div>
+                                <div class="rooms">
+                                    <div class="room">
+                                        <span class="room_title">Area</span>
+                                        <div class="room_content">
+                                            <div class="room_image"><img src="~/Styles/images/area.png" alt=""></div>
+                                            <span class="room_number">@Model.Area Sq Ft</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="room_tags">
+                                    <span class="room_tag"><a href="#">@Model.Type</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="login_box">
+    <div class="row">
+        <div class="col">
+            <div class="login_box_outer">
+                <div class="login_box_inner">
+                    <!-- register Box Title -->
+                    <div class="login_box_title text-center">
+                        <div class="login_box_title_inner">
+                            <span>Place Your Bid</span>
+                        </div>
+                    </div>
+
+                    <!-- register Form -->
+                    @using( Html.BeginForm( "PlaceBid", "Property", FormMethod.Post, new { @class = "login_form", role = "form" } ) )
+                    {
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item_login dropdown_item_login">
+                                <div class="dropdown_item_title">Apartment Price</div>
+                                @Html.EditorFor( model => model.HousePrice )
+                            </li>
+                        </ul>
+                        <ul class="dropdown_row clearfix">
+                            <li class="dropdown_item_login dropdown_item_login">
+                                <div class="dropdown_item_title">Land Price</div>
+                                @Html.EditorFor( model => model.LandPrice )
+                            </li>
+                        </ul>
+
+                        @Html.HiddenFor( model => model.PropertyId );
+
+                        <ul class="dropdown_row clearfix text-center">
+                            <li class="dropdown_item_login dropdown_item_login">
+                                <div class="login_button">
+                                    <input value="Place Bid" type="submit" class="login_submit_button">
+                                </div>
+
+                            </li>
+
+                        </ul>
+                        <ul class="dropdown_row clearfix text-center">
+                            <li></li>
+                        </ul>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

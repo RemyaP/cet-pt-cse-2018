@@ -209,7 +209,7 @@
   .button-primary-flat.is-active {
     background-color: #2798eb;
     border-color: #2798eb;
-    color: #0880d7; }
+    color: lightgray; }
 
 .button-plain,
 .button-plain-flat {

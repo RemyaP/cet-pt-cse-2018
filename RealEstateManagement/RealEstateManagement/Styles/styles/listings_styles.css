@@ -1523,3 +1523,21 @@ section
 	text-transform: uppercase;
     margin-left:200px;
 }
+
+.listing_submit_button
+{
+	height: 34px;
+	font-size: 18px !important;
+	font-weight: 600 !important;
+	text-transform: uppercase;
+    margin-left:200px;
+}
+
+.bid_link
+{
+	height: 14px;
+	font-size: 12px !important;
+	background: #fd784f !important;
+	margin-right: 7px !important;
+	margin-bottom: 9px !important;
+}

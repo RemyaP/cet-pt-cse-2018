@@ -21,10 +21,10 @@ namespace RealEstateManagement.Models
         public void GetProperties()
         {
             if( null != Properties ) Properties.Clear();
+            else Properties = new List<PropertyViewModel>();
             using( RealEntities db = new RealEntities() )
             {
                 var properties = db.properties.Where( p => p.seller_id == SellerId ).ToList<property>();
-                if( null == Properties ) Properties = new List<PropertyViewModel>();
                 if( null != properties )
                 {
                     foreach( var property in properties )
